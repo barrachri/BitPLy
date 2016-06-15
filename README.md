@@ -16,7 +16,10 @@ Quick start
 2. Include the myblog URLconf in urls.py:
   url(r'^myblog/', include('myblog.urls'))
 
-3. Run `python manage.py syncdb` to create myblog's models.
+3. Run `python manage.py migrate` to create myblog's models.
+3. Run `python manage.py makemigrations` to create myblog's models.
+3. Run `python manage.py migrate` to create myblog's models.
+3. Run `python manage.py create_fake_users 100` to create myblog's models.
 
 4. Run the development server and access http://127.0.0.1:8000/admin/ to
     manage blog posts.
