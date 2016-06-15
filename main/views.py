@@ -2,6 +2,7 @@ import string
 import random
 from math import floor
 
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import render, HttpResponse, redirect
@@ -10,7 +11,15 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.utils import IntegrityError
 
 from main import models
-from main import utils
+
+def random_generator(min=3, max=settings.SHORT_URL_MAX_LEN,
+    chars=string.ascii_uppercase + string.ascii_lowercase + string.digits):
+    '''Just a stupid (pseudo) random generator of a string,
+    has a min lenght and a max lenght, chars is where the
+    random chars are extracted'''
+
+    r = random.randint(min, max)
+    return ''.join(random.choice(chars) for x in range(r))
 
 class Index(View):
     ''''''
@@ -28,7 +37,7 @@ class Index(View):
         if form.is_valid():
 
             while True:
-                short_url = utils.random_generator()
+                short_url = random_generator()
                 new = not(models.Url.objects.filter(short_url=short_url).exists())
                 if new is True:
                     break

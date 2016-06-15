@@ -10,15 +10,18 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
+import utils
 import dj_database_url
+
 
 try:
     from .settings import *
 except ImportError as e:
     raise ImportError("Error: failed to import settings module ({})".format(e))
 
-DEBUG = os.getenv("DEBUG", False)
-TEMPLATE_DEBUG = os.getenv("TEMPLATE_DEBUG", False)
+PRODUCTION_ENV = utils.get_env("PRODUCTION_ENV", False)
+DEBUG = utils.get_env("DEBUG", False)
+TEMPLATE_DEBUG = utils.get_env("TEMPLATE_DEBUG", False)
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # Update database configuration with $DATABASE_URL.

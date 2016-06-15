@@ -2,10 +2,12 @@
 import os
 import sys
 
+import utils
+
 if __name__ == "__main__":
     # Check if the PRODUCTION_ENV exists, if not set it to False
     # and loads the normal settings
-    PRODUCTION_ENV = os.getenv("PRODUCTION_ENV", False)
+    PRODUCTION_ENV = utils.get_env("PRODUCTION_ENV", False)
     if PRODUCTION_ENV:
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "bitply.prod_settings")
     else:
