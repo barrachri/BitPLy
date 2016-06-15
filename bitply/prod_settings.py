@@ -13,9 +13,9 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import dj_database_url
 
 try:
-    from settings import *
+    from .settings import *
 except ImportError as e:
-    pass
+    raise ImportError("Error: failed to import settings module ({})".format(e))
 
 DEBUG = os.getenv("DEBUG", False)
 TEMPLATE_DEBUG = os.getenv("TEMPLATE_DEBUG", False)
@@ -25,6 +25,11 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DB_FROM_ENV = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(DB_FROM_ENV)
 
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
 
 # Heroku configuration static-files
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
