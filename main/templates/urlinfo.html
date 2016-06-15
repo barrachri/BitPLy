@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+
+{% block lead %}Info about url <strong>{{domain}}/{{url}}</strong>{% endblock %}
+{% block content %}
+
+  <table class=table>
+
+    <thead>
+      <tr>
+        <th>Url</th>
+        <th>Submitter</th>
+        <th>Created on</th>
+        <th>User thumbnail</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="{{url.url}}">{{url.url}}</a></td>
+        <td>{{url.created_by.first_name|title}} {{url.created_by.last_name|title}}</td>
+        <td>{{url.created_on}}</td>
+        <td><image src="{{image.image_url}}" class="img-thumbnail"></td>
+      </tr>
+    </tbody>
+  </table>
+
+{% endblock %}
