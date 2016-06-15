@@ -44,6 +44,5 @@ class Command(BaseCommand):
                     date_joined = datetime.fromtimestamp(user['registered'], timezone.utc)
                     )
                     # Save the personal User thumbnail inside UserImage
-                    p= models.UserImage.objects.create(image_url= user['picture']['medium'], user=new_user)
-                    print(p)
+                    p = models.UserImage.objects.create(image_url= user['picture']['medium'], user=new_user)
             self.stdout.write(self.style.SUCCESS('Successfully inserted {} users from randomuser.me'.format(options['num_users'])))
