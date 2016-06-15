@@ -19,7 +19,7 @@ Quick start Heroku
 2. Run 'heroku config:set SECRET_KEY='PutYourSecretKeyHere'
 3. Run 'heroku create'
 4. Run 'git push heroku master'
-6. Run 'heroku run python python manage.py makemigrations main'
-7. Run 'heroku run python python manage.py migrate'
-8. Run 'heroku run python python manage.py create_fake_users 100'
+6. Run 'heroku run python manage.py makemigrations main'
+7. Run 'heroku run python manage.py migrate'
+8. Run 'heroku run python manage.py create_fake_users 100'
 9. Access the heroku url
