@@ -21,6 +21,12 @@ Quick start
 3. Run `python manage.py migrate` to create myblog's models.
 3. Run `python manage.py create_fake_users 100` to create myblog's models.
 
+PRODUCTION_ENV = True
+DEBUG = False
+TEMPLATE_DEBUG = False
+SECRET_KEY = '2&e@x5svncf^t@20zpo*pl_utt2xogzy#s5@7o22dzf^&dx1a('
+heroku config:set SECRET_KEY='2&e@x5svncf^t@20zpo*pl_utt2xogzy#s5@7o22dzf^&dx1a('
+
 4. Run the development server and access http://127.0.0.1:8000/admin/ to
     manage blog posts.
 
