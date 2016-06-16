@@ -16,7 +16,7 @@ class Url(models.Model):
     url and short_url are set unique=True to reinforce the constraint at a db level'''
     url = models.URLField(unique=True)
     short_url = models.CharField(max_length=255, unique=True)
-    created_by = models.OneToOneField(User)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
