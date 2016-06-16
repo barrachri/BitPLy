@@ -12,6 +12,7 @@ from django.db.utils import IntegrityError
 
 from main import models
 
+
 def random_generator(min=3, max=settings.SHORT_URL_MAX_LEN,
     chars=string.ascii_uppercase + string.ascii_lowercase + string.digits):
     '''Just a stupid (pseudo) random generator of a string,
@@ -22,7 +23,7 @@ def random_generator(min=3, max=settings.SHORT_URL_MAX_LEN,
     return ''.join(random.choice(chars) for x in range(r))
 
 class Index(View):
-    ''''''
+    '''View for the index page, also creates a short url after a successful POST request'''
 
     def get(self, request):
         # Index page of the website
@@ -30,11 +31,10 @@ class Index(View):
         return render(request, "index.html", {"form": form})
 
     def post(self, request):
-        #aggiungere un check se l'url esiste
-        # aggiungere un check se la short url esiste
         form = models.UrlForm(request.POST)
         if form.is_valid():
-
+            # this while is needed to be sure about the uniqueness
+            # of the random_generator() url
             while True:
                 short_url = random_generator()
                 new = not(models.Url.objects.filter(short_url=short_url).exists())
@@ -53,7 +53,8 @@ class Index(View):
             return render(request, "index.html", {"form": form})
 
 class RedirectToUrl(View):
-    ''''''
+    '''View for redirecting a short url to the long url, if the short_url
+    doesn't exist it returns an error page'''
     def get(self, request, short_url):
         try:
             url = models.Url.objects.get(short_url=short_url)
@@ -62,10 +63,10 @@ class RedirectToUrl(View):
             return render(request, "error.html", {"short_url": short_url})
 
 class UrlInfo(View):
-    ''''''
+    '''View for get info about a short url, if the short_url
+    doesn't exist it returns an error page'''
     def get(self, request, short_url):
         try:
-
             obj_url = models.Url.objects.get(short_url=short_url)
             image = models.UserImage.objects.get(user=obj_url.created_by)
             long_url = request.build_absolute_uri(obj_url.short_url)
