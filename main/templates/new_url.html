@@ -1,10 +1,7 @@
 {% extends "base.html" %}
 
 
-{% block lead %}Ehi Dude ! your short url <a href="{{domain}}/{{url}}"><strong>{{domain}}/{{url}}</strong></a>{% endblock %}
+{% block lead %}Ehi Dude ! your short url <a href="{{long_url}}"><strong>{{long_url}}</strong></a>{% endblock %}
 {% block content %}
-
-{{domain}}
-{{url}}
 
 {% endblock %}

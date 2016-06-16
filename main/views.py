@@ -25,14 +25,13 @@ class Index(View):
     ''''''
 
     def get(self, request):
-        form = models.UrlForm()
         # Index page of the website
+        form = models.UrlForm()
         return render(request, "index.html", {"form": form})
 
     def post(self, request):
         #aggiungere un check se l'url esiste
         # aggiungere un check se la short url esiste
-        current_site = get_current_site(request)
         form = models.UrlForm(request.POST)
         if form.is_valid():
 
@@ -47,7 +46,8 @@ class Index(View):
            "short_url" : short_url,
            "created_by": User.objects.get(pk=random_user)
            })
-            return render(request, "new_url.html", {"url": obj_url.short_url, "domain": current_site})
+            long_url = request.build_absolute_uri(obj_url.short_url)
+            return render(request, "new_url.html", {"token": obj_url.short_url, "long_url": long_url})
         else:
             print(form.errors['url'].as_json())
             return render(request, "index.html", {"form": form})
@@ -65,12 +65,13 @@ class UrlInfo(View):
     ''''''
     def get(self, request, short_url):
         try:
-            current_site = get_current_site(request)
-            url = models.Url.objects.get(short_url=short_url)
-            image = models.UserImage.objects.get(user=url.created_by)
+
+            obj_url = models.Url.objects.get(short_url=short_url)
+            image = models.UserImage.objects.get(user=obj_url.created_by)
+            long_url = request.build_absolute_uri(obj_url.short_url)
 
             return render(request, "urlinfo.html", {
-            'url': url, "image" : image, "domain": current_site.domain
+            'url': obj_url, "image" : image, "long_url": long_url
         })
         except ObjectDoesNotExist:
             return render(request, "error.html", {"short_url": short_url})
