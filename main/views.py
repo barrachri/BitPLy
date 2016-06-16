@@ -33,7 +33,7 @@ class Index(View):
     def post(self, request):
         form = models.UrlForm(request.POST)
         if form.is_valid():
-            # this while is needed to be sure about the uniqueness
+            # This while is needed to be sure about the uniqueness
             # of the random_generator() url
             while True:
                 short_url = random_generator()
