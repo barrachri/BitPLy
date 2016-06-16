@@ -8,10 +8,11 @@ Quick start Local
 -----------
 
 1. Check your ENV_VAR if you want a local env or a production env
-2. Run 'python manage.py makemigrations main'
-3. Run 'python manage.py migrate'
-4. Run 'python manage.py create_fake_users 100'
-5. Run the development server and access http://127.0.0.1:8000
+2. Run 'pip install requirements/dev.txt'
+3. Run 'python manage.py makemigrations main'
+4. Run 'python manage.py migrate'
+5. Run 'python manage.py create_fake_users 100'
+6. Run the development server and access http://127.0.0.1:8000
 
 Quick start Heroku
 -----------

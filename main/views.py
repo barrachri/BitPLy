@@ -47,8 +47,7 @@ class Index(View):
            "short_url" : short_url,
            "created_by": User.objects.get(pk=random_user)
            })
-            print(obj_url)
-            return render(request, "new_url.html", {"url": obj_url.short_url, "domain": current_site.domain})
+            return render(request, "new_url.html", {"url": obj_url.short_url, "domain": current_site})
         else:
             print(form.errors['url'].as_json())
             return render(request, "index.html", {"form": form})
