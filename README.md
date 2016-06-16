@@ -8,7 +8,9 @@ Test before run !
 
 python manage.py test
 
-** Check your ENV_VAR if you want a local env or a production env **
+**Python version used: 3.x**
+
+**Check your ENV_VAR if you want a local env or a production env**
 
 Quick start Local
 -----------
